@@ -1,45 +1,12 @@
-import express from "express";
-import path from "path";
-import { createServer as createViteServer } from "vite";
+# GEMINI_API_KEY: Required for Gemini AI API calls.
+# AI Studio automatically injects this at runtime from user secrets.
+# Users configure this via the Secrets panel in the AI Studio UI.
+GEMINI_API_KEY="MY_GEMINI_API_KEY"
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+# APP_URL: The URL where this applet is hosted.
+# AI Studio automatically injects this at runtime with the Cloud Run service URL.
+# Used for self-referential links, OAuth callbacks, and API endpoints.
+APP_URL="MY_APP_URL"
 
-  // Middleware for parsing JSON
-  app.use(express.json());
-
-  // API routes
-  app.get("/api/health", (req, res) => {
-    res.json({ status: "ok" });
-  });
-
-  // Example API route for contact
-  app.post("/api/contact", (req, res) => {
-    // In a real app, you might save this to a database or send an email
-    // For now, we'll just return success
-    res.json({ message: "Received", data: req.body });
-  });
-
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
-  } else {
-    // Production: serve static files from dist
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
-  }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-}
-
-startServer();
+# CLOUDFLARE_TUNNEL_TOKEN: Your Cloudflare Tunnel token
+TUNNEL_TOKEN=
