@@ -1,4 +1,6 @@
-# wrangler.toml
-name = 'so-i-am'
-pages_build_output_dir = "dist"
-compatibility_date = "2024-04-01"
+{
+  "name": "JBMR Coaching Classes",
+  "description": "Premium educational coaching for 6th to 12th grade students focusing on UP, CBSE, and ICSE boards, including specialized English speaking courses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
